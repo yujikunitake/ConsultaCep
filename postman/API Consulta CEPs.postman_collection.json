@@ -1,0 +1,211 @@
+{
+	"info": {
+		"_postman_id": "c1bf28dc-2190-4edc-82f4-12c55fa20bb5",
+		"name": "API Consulta CEPs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "40521705"
+	},
+	"item": [
+		{
+			"name": "consultar ceps",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/:estado/:cidade/:logradouro",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						":estado",
+						":cidade",
+						":logradouro"
+					],
+					"variable": [
+						{
+							"key": "estado",
+							"value": "SP"
+						},
+						{
+							"key": "cidade",
+							"value": "São Paulo"
+						},
+						{
+							"key": "logradouro",
+							"value": "Luiz"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar consultas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `\r",
+							"<style type=\"text/css\">\r",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+							"    .tftable tr {background-color:#ffffff;}\r",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+							"    .tftable tr:hover {background-color:#e0ffff;}\r",
+							"</style>\r",
+							"\r",
+							"<table class=\"tftable\" border=\"1\">\r",
+							"    <tr>\r",
+							"        <th>CEP</th>\r",
+							"        <th>Logradouro</th>\r",
+							"        <th>Complemento</th>\r",
+							"        <th>Unidade</th>\r",
+							"        <th>Bairro</th>\r",
+							"        <th>Localidade</th>\r",
+							"        <th>UF</th>\r",
+							"        <th>Estado</th>\r",
+							"        <th>Regiao</th>\r",
+							"        <th>IBGE</th>\r",
+							"        <th>GIA</th>\r",
+							"        <th>DDD</th>\r",
+							"        <th>SIAFI</th>\r",
+							"    </tr>\r",
+							"    \r",
+							"    {{#each response}}\r",
+							"        <tr>\r",
+							"            <td>{{cep}}</td>\r",
+							"            <td>{{logradouro}}</td>\r",
+							"            <td>{{complemento}}</td>\r",
+							"            <td>{{unidade}}</td>\r",
+							"            <td>{{bairro}}</td>\r",
+							"            <td>{{localidade}}</td>\r",
+							"            <td>{{uf}}</td>\r",
+							"            <td>{{estado}}</td>\r",
+							"            <td>{{regiao}}</td>\r",
+							"            <td>{{ibge}}</td>\r",
+							"            <td>{{gia}}</td>\r",
+							"            <td>{{ddd}}</td>\r",
+							"            <td>{{siafi}}</td>\r",
+							"        </tr>\r",
+							"    {{/each}}\r",
+							"</table>\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"    return { response: pm.response.json() };\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:8000/"
+			},
+			"response": []
+		},
+		{
+			"name": "deletar consulta",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/:id",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6765baa493fd3987283d1099"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "atualizar consulta",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cep\": \"12345-678\",\r\n    \"logradouro\": \"Rua dos Bobos\",\r\n    \"complemento\": \"0\",\r\n    \"unidade\": \"abcd\",\r\n    \"ddd\": 123,\r\n    \"regiao\": \"Pastel de Palmito\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/:id",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6765baa493fd3987283d1098"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "baixar csv",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:8000/download/csv"
+			},
+			"response": []
+		},
+		{
+			"name": "baixar json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:8000/download/json"
+			},
+			"response": []
+		}
+	]
+}
